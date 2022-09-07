@@ -1,0 +1,24 @@
+<div class="column">
+    <p>Click on the image below to activate the dropper</p>
+    <img id="eyeDropperIcon" src="/images/cat.jpg"/>
+    <p>The hex color of the selected pixel is <b><span id="colorCode">???</span></b></p>
+  </div>
+  <script>
+    // Create an EyeDropper object
+let eyeDropper = new EyeDropper();
+
+// Enter eyedropper mode
+let icon = document.getElementById("eyeDropperIcon")
+let color = document.getElementById("colorCode")
+// You may use the dropper only on the cat!
+icon.addEventListener('click', e => {
+    eyeDropper.open()
+    .then(colorSelectionResult => {
+        // returns hex color value (#RRGGBB) of the selected pixel
+        color.innerText = colorSelectionResult.sRGBHex;
+    })
+    .catch(error => {
+        // handle the user choosing to exit eyedropper mode without a selection
+    });
+});
+  </script>
